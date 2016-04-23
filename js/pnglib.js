@@ -115,7 +115,6 @@
 		}
 
 		// convert a color and build up the palette
-		this.palette_len = 0;
 		this.color = function(red, green, blue, alpha) {
 
 			alpha = alpha >= 0 ? alpha : 255;
@@ -132,15 +131,12 @@
 				this.buffer[this.trns_offs+8+this.pindex] = String.fromCharCode(alpha);
 
 				this.palette[color] = String.fromCharCode(this.pindex++);
-				this.palette_len ++;
 			}
 			return this.palette[color];
 		}
 
 		// output a PNG string, Base64 encoded
 		this.getBase64 = function() {
-
-			console.log('palette len: ', this.palette_len);
 
 			var s = this.getDump();
 
@@ -160,6 +156,10 @@
 				if (l < i+3) { e4 = 64; } else { e4 = c3 & 0x3f; }
 				r+= ch.charAt(e1) + ch.charAt(e2) + ch.charAt(e3) + ch.charAt(e4);
 			} while ((i+= 3) < l);
+
+			console.log('palette len: ', this.pindex);
+			console.log('base64 len: ', r.length);
+
 			return r;
 		}
 
