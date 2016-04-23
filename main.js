@@ -22,14 +22,14 @@ var cur_C2 = lch.C2;
 var cur_H1 = lch.H1;
 var cur_H2 = lch.H2;
 
-var dd = 0.02;
+var dd = 0.05;
 
 var setColor = function () {
   $('body').css('background', 'linear-gradient(to bottom, ' +
     chroma.lch(cur_L1, cur_C1, cur_H1).css() + ' 0, ' +
     chroma.lch(cur_L2, cur_C2, cur_H2).css() + ' 100%)');
-  $('#info-1').html(parseInt(cur_L1) + ' ' + parseInt(cur_C1) + ' ' + parseInt(cur_H1));
-  $('#info-2').html(parseInt(cur_L2) + ' ' + parseInt(cur_C2) + ' ' + parseInt(cur_H2));
+  // $('#info-1').html(parseInt(cur_L1) + ' ' + parseInt(cur_C1) + ' ' + parseInt(cur_H1));
+  // $('#info-2').html(parseInt(cur_L2) + ' ' + parseInt(cur_C2) + ' ' + parseInt(cur_H2));
 };
 
 var type = -1;  // -1 | 0 | 1 | 2
@@ -69,16 +69,14 @@ document.addEventListener('touchmove', function (e) {
   var deltaX = e.pageX - pageX;
   var deltaY = e.pageY - pageY;
   if (type === 0) {
-    cur_C1 = Math.max(0, lch.C1 - deltaY * 8 * dd);
-    cur_C2 = Math.max(0, lch.C2 - deltaY * 8 * dd);
-    cur_L1 = Math.max(0, lch.L1 + deltaX * dd);
-    cur_L2 = Math.max(0, lch.L2 + deltaX * dd);
+    cur_L1 = Math.max(0, lch.L1 - deltaY * dd);
+    cur_L2 = Math.max(0, lch.L2 - deltaY * dd);
   } else if (type === 1) {
-    cur_C1 = Math.max(0, lch.C1 - deltaY * 8 * dd);
-    cur_H1 = (lch.H1 + Math.pow(deltaX * dd, 2) + 360) % 360;
+    cur_C1 = Math.max(0, lch.C1 - deltaY * 4 * dd);
+    cur_H1 = (lch.H1 + deltaX * 8 * dd + 360) % 360;
   } else if (type === 2) {
-    cur_C2 = Math.max(0, lch.C2 - deltaY * 8 * dd);
-    cur_H2 = (lch.H2 + Math.pow(deltaX * dd, 2) + 360) % 360;
+    cur_C2 = Math.max(0, lch.C2 + deltaY * 4 * dd);
+    cur_H2 = (lch.H2 + deltaX * 8 * dd + 360) % 360;
   }
 
   setColor();
@@ -87,7 +85,7 @@ document.addEventListener('touchmove', function (e) {
 var download = function () {
   var c1 = chroma.lch(cur_L1, cur_C1, cur_H1);
   var c2 = chroma.lch(cur_L2, cur_C2, cur_H2);
-  var scale = chroma.scale([c1, c2]);
+  var scale = chroma.scale([c1, c2]).mode('lab');
   var p = new PNGlib(640, 1136, 256);
   var background = p.color(255, 255, 255);
   var r = 0;
