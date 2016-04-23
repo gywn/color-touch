@@ -43,7 +43,7 @@ var download = function () {
 
   $('#download').attr('class', 'okay');
   delay(function () {
-    $('#download').attr('class', '');
+    $('#download').attr('class', 'download');
   }, 2000);
 
   $('<a>', {
@@ -52,18 +52,17 @@ var download = function () {
   })[0].click();
 };
 
-$('#download').bind('touchstart', function () {
-  $('#download').attr('class', 'loading');
-  delay(download);
-});
-
 $('#download').bind('click', function () {
-  $('#download').attr('class', 'loading');
-  delay(download);
+  if ($(this).hasClass('download')) {
+    $(this).attr('class', 'loading');
+    delay(download);
+  }
+  return false;
 });
 
 $('#reset').bind('click', function () {
   ctouch.loadSetting();
+  return false;
 });
 
 ctouch.lchChange();

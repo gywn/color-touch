@@ -6,28 +6,36 @@ html {
 
 body {
     position: absolute;
-    padding: 0;
-    margin: 0;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    margin: 0;
+    padding: 0;
 }
 
-#download, #reset, #info-1, #info-2 {
-    display: block;
+body.dark {
+    color: white;
+}
+
+body.light {
+    color: #4D4D4D;
+}
+
+#download, #reset, #help, #go-back {
     position: absolute;
+    display: block;
+    border-radius: 25px;
     background: white;
     color: black;
     text-align: center;
-    border-radius: 3px;
 }
 
 #download {
     top: 5px;
     left: 5px;
-    height: 50px;
     width: 50px;
+    height: 50px;
 }
 
 body.dark #download {
@@ -56,9 +64,9 @@ body.light #download.okay {
 
 #reset {
     top: 5px;
-    right: 5px;
-    height: 50px;
+    right: 50px;
     width: 50px;
+    height: 50px;
 }
 
 body.dark #reset {
@@ -67,4 +75,49 @@ body.dark #reset {
 
 body.light #reset {
     background: url(../img/sprite.svg) no-repeat -50px 0px;
+}
+
+#help, #go-back {
+    top: 5px;
+    right: 5px;
+    width: 50px;
+    height: 50px;
+}
+
+body.dark #help {
+    background: url(../img/sprite.svg) no-repeat -0px -100px;
+}
+
+body.light #help {
+    background: url(../img/sprite.svg) no-repeat -50px -100px;
+}
+
+body.dark #go-back {
+    background: url(../img/sprite.svg) no-repeat -100px -100px;
+}
+
+body.light #go-back {
+    background: url(../img/sprite.svg) no-repeat -150px -100px;
+}
+
+h1 {
+    margin: 25px 20px;
+    font: normal 700 20px/20px Avenir;
+}
+
+dl {
+    margin: 0px 20px;
+}
+dt {
+    margin: 25px 0 10px 0;
+    font: normal 500 16px/24px sans-serif;
+}
+
+dt i, dd b {
+    font: normal 700 18px/24px Avenir;
+}
+
+dd {
+    margin: 0 0 0 15px;
+    font: normal 300 16px/24px sans-serif;
 }
